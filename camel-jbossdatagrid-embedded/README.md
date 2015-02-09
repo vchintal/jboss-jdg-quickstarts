@@ -1,7 +1,7 @@
-Using Camel with JBoss Data Grid in Webapps
-===========================================
+Using Camel with JBoss Data Grid 
+================================
 
-This quickstart demonstrates how to use Camel in a web application using JDG cache with the __camel-jbossdatagrid__ component. Working with Camel is greatly simplified when either the __Spring Framework__ or __Apache Aries Blueprint__ is used in applications. In this quickstart we would define Camel routes and other beans using a Spring context file.
+This quickstart demonstrates how to use Camel with JDG cache using the __camel-jbossdatagrid__ component in a sample webapp. Working with Camel is greatly simplified when either the __Spring Framework__ or __Apache Aries Blueprint__ is used in applications. In this quickstart we would define Camel routes and other beans using a Spring context file.
 
 * Author: Vijay Chintalapati
 
