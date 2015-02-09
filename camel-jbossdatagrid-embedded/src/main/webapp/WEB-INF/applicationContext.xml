@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+                  
+    <bean id="cacheManager" class="org.infinispan.manager.DefaultCacheManager"
+        init-method="start" destroy-method="stop">
+        <constructor-arg value="infinispan.xml"/>
+    </bean>
+    
+    <bean id="json" class="org.apache.camel.component.gson.GsonDataFormat">
+        <property name="unmarshalType" value="org.jboss.as.quickstarts.camel_datagrid.pojos.PersonPojo"/>
+    </bean>
+
+    <camelContext id="local-producer" xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <from uri="file://${path}?delay=500" />
+            <split>
+                <tokenize token="\n" />
+                <unmarshal ref="json" />
+                <setHeader headerName="CamelInfinispanKey">
+                    <simple>${body.id}</simple>
+                </setHeader>
+                <setHeader headerName="CamelInfinispanValue">
+                    <simple>${body}</simple>
+                </setHeader>
+                <setHeader headerName="CamelInfinispanOperation">
+                    <simple>CamelInfinispanOperationPut</simple>
+                </setHeader>
+                <setHeader headerName="CamelInfinispanCacheName">
+                    <simple>camel-cache</simple>
+                </setHeader>
+                <to uri="infinispan://localhost?cacheContainer=#cacheManager" />
+            </split>
+        </route>
+    </camelContext>    
+</beans>
