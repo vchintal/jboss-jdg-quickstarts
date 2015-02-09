@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.camel_datagrid.rest;
+package org.jboss.as.quickstarts.camel_datagrid;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,16 +18,16 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CacheRestService
+ * Servlet implementation class CacheService
  */
-@WebServlet("/CacheRestService")
-public class CacheRestService extends HttpServlet {
+@WebServlet("/CacheService")
+public class CacheService extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CacheRestService() {
+    public CacheService() {
         super();
     }
 

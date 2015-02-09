@@ -13,7 +13,7 @@
 
             var rowcount = jQuery("#cacheTable tr").length;
             
-            jQuery.getJSON('CacheRestService', null, function(cacheEntries) {
+            jQuery.getJSON('CacheService', null, function(cacheEntries) {
                 if (cacheEntries) {
                     if (cacheEntries.length == 0) {
                         $("#cacheTable > tbody").html("");
